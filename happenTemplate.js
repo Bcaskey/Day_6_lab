@@ -33,7 +33,7 @@ var localWithSec = date.toLocaleTimeString();
 var localWithOutSec = date.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
 var mdyNum = String(monthNum + "/" + dayOfMonNum + "/" + year);
 var mdyNameNum = String(monthName + " " + dayOfMonNum + ", " + year);
-var defaultTime = String(year + "-" + monthDblNum + "-" + dayOfMonDblNum + "T16:" + minuteDbl + ":" + secondsDbl);
+var defaultTime = String(year + "-" + monthDblNum + "-" + dayOfMonDblNum + "T" + hoursTwentyFour + ":" + minuteDbl + ":" + secondsDbl);
 var weekOfYear = Math.ceil(dayOfYearNum / 7);
 
 
