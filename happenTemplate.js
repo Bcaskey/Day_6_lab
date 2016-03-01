@@ -12,13 +12,12 @@ var dayOfWeekThreeLtrArray = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 var dayOfWeekThreeLtr =  dayOfWeekThreeLtrArray[String(dayOfWkNum)];
 var dayOfWeekTwoLtrArray = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
 var dayOfWeekTwoLtr =  dayOfWeekTwoLtrArray[String(dayOfWkNum)];
-var dayOfMonNum = date.getDate(); //day value of the month, needs to be a string.
+var dayOfMonNum = date.getDate();
 var dayOfMonDblNum = ('0' + (date.getDate())).slice(-2)
 var dayOfMonOrdinal
-var year = date.getFullYear(); //four digits
+var year = date.getFullYear();
 var yearAbbr = ('0' + (date.getFullYear())).slice(-2);
-var dayOfYearNum; //this will be a function of some kind
-//var dayOfYearOrd
+var dayOfYearNum;
 var now = new Date();
 var start = new Date(now.getFullYear(), 0, 0);
 var diff = now - start;
@@ -35,10 +34,8 @@ var localWithOutSec = date.toLocaleTimeString(navigator.language, {hour: '2-digi
 var mdyNum = String(monthNum + "/" + dayOfMonNum + "/" + year);
 var mdyNameNum = String(monthName + " " + dayOfMonNum + ", " + year);
 var defaultTime = String(year + "-" + monthDblNum + "-" + dayOfMonDblNum + "T16:" + minuteDbl + ":" + secondsDbl);
-
-// week of year, use math do floor or mod
 var weekOfYear = Math.ceil(dayOfYearNum / 7);
-//console.log(weekOfYear);
+
 
 
 var library = (function() {
@@ -151,26 +148,36 @@ var library = (function() {
 					Numeral: function(){
                         return String(dayOfMonNum);
                     },
-					Ordinal: function(){},
+					Ordinal: function(){
+                        var i = dayOfMonNum;
+                        var j = dayOfMonNum % 10;
+                        var k = dayOfMonNum % 100;
+                        
+                        if (j == 1  &&  k != 11) {
+                            return String(i + "st");
+                        } else if (i == 2 && i != 12) {
+                            return String(dayOfMonNum + "nd");
+                        } else if (i == 3 && i != 13) {
+                            return String(dayOfMonNum + "rd");
+                        } else {
+                            return String(dayOfMonNum + "th");
+                        }
+                    },
 					DateDblDigit: function(){
                         return String(dayOfMonDblNum);
                     }
 				}
 			})(),
 			
-            // Code below is fixing problem 1 monthNumber
             MonthNumber: function () {
-                return  String(monthNum); //Code Up Top.
+                return  String(monthNum);
             },
-            // Code below is fixing problem 2, double digit month
             MonthNumberDblDigit: function(){
-                return String(monthDblNum); // Code Up top.
+                return String(monthDblNum);
             },
-            // Code below is fixing problem 3 current month abbreviated
 			AbrOfCurrentMonth: function(){
                 return monthAbbrName;
             },
-            // Code below is fixing problem 4 current month
 			CurrentMonth: function(){
                 return monthName;
             }
@@ -183,7 +190,21 @@ var library = (function() {
 					Numeral: function(){
                         return String(dayOfYearNum);
                     },
-					Ordinal: function(){}
+					Ordinal: function(){
+                        var l = dayOfYearNum;
+                        var m = dayOfYearNum % 10;
+                        var n = dayOfYearNum % 100;
+                        
+                        if (m == 1  &&  n != 11) {
+                            return String(l + "st");
+                        } else if (l == 2 && l != 12) {
+                            return String(dayOfYearNum + "nd");
+                        } else if (l == 3 && l != 13) {
+                            return String(dayOfYearNum + "rd");
+                        } else {
+                            return String(dayOfYearNum + "th");
+                        }
+                    }
 				}
 			})(),
 			YearFull: function(){
